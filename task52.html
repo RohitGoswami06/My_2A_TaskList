@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Form Validation</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding-top: 60px;
+        }
+
+        .form-box {
+            width: 400px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .field {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+
+        .success {
+            color: green;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="form-box">
+
+        <h2>Registration Form</h2>
+
+        <form onsubmit="return validateForm()">
+
+            <!-- Name -->
+            <div class="field">
+
+                <label>Name</label>
+
+                <input
+                    type="text"
+                    id="name"
+                    oninput="checkName()"
+                >
+
+                <p id="nameMessage"></p>
+
+            </div>
+
+
+            <!-- Email -->
+            <div class="field">
+
+                <label>Email</label>
+
+                <input
+                    type="text"
+                    id="email"
+                    oninput="checkEmail()"
+                >
+
+                <p id="emailMessage"></p>
+
+            </div>
+
+
+            <!-- Password -->
+            <div class="field">
+
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    id="password"
+                    oninput="checkPassword()"
+                >
+
+                <p id="passwordMessage"></p>
+
+            </div>
+
+
+            <button type="submit">
+                Submit
+            </button>
+
+            <a href="task1.html">Back
+            </a>
+
+        </form>
+
+    </div>
+
+
+    <script>
+
+        // Name validation
+        function checkName() {
+
+            let name = document.getElementById("name").value;
+            let message = document.getElementById("nameMessage");
+
+            if (name.length < 3) {
+
+                message.innerText = "Name must be at least 3 characters.";
+                message.className = "error";
+
+            }
+            else {
+
+                message.innerText = "Name is valid.";
+                message.className = "success";
+
+            }
+        }
+
+
+        // Email validation
+        function checkEmail() {
+
+            let email = document.getElementById("email").value;
+            let message = document.getElementById("emailMessage");
+
+            if (!email.includes("@")) {
+
+                message.innerText = "Please enter a valid email.";
+                message.className = "error";
+
+            }
+            else {
+
+                message.innerText = "Email is valid.";
+                message.className = "success";
+
+            }
+        }
+
+
+        // Password validation
+        function checkPassword() {
+
+            let password = document.getElementById("password").value;
+            let message = document.getElementById("passwordMessage");
+
+            if (password.length < 6) {
+
+                message.innerText = "Password must be at least 6 characters.";
+                message.className = "error";
+
+            }
+            else {
+
+                message.innerText = "Password is valid.";
+                message.className = "success";
+
+            }
+        }
+
+
+        // Form validation before submit
+        function validateForm() {
+
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+
+            if (
+                name.length < 3 ||
+                !email.includes("@") ||
+                password.length < 6
+            ) {
+
+                alert("Please fix the errors in the form.");
+
+                return false;
+            }
+
+            alert("Form submitted successfully!");
+
+            return true;
+        }
+
+    </script>
+
+</body>
+</html>

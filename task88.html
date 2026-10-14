@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Country Information App</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .search-box {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            max-width: 600px;
+            margin: 30px auto;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .search-box button {
+            padding: 12px 20px;
+            background-color: #222;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .search-box button:hover {
+            background-color: #444;
+        }
+
+        #loader {
+            display: none;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        #error {
+            display: none;
+            text-align: center;
+            color: red;
+        }
+
+        #country {
+            display: none;
+            background-color: white;
+            max-width: 700px;
+            margin: 30px auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        #country img {
+            width: 250px;
+            max-width: 100%;
+            border-radius: 5px;
+        }
+
+        #country h2 {
+            font-size: 30px;
+            margin: 20px 0;
+        }
+
+        .info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .info-box {
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .info-box p {
+            margin: 5px;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+
+            .search-box {
+                flex-direction: column;
+            }
+
+            .info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Country Information</h1>
+    <a href="task1.html">Back</a>
+
+
+    <!-- Search -->
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="countryInput"
+            placeholder="Enter country name"
+        >
+
+        <button onclick="searchCountry()">
+            Search
+        </button>
+
+    </div>
+
+
+    <!-- Loader -->
+    <div id="loader">
+        Loading...
+    </div>
+
+
+    <!-- Error -->
+    <div id="error">
+        Country not found. Please try again.
+    </div>
+
+
+    <!-- Country Information -->
+    <div id="country">
+
+        <img id="flag" src="" alt="Country Flag">
+
+        <h2 id="countryName"></h2>
+
+
+        <div class="info">
+
+            <div class="info-box">
+                <p class="label">Capital</p>
+                <p id="capital"></p>
+            </div>
+
+            <div class="info-box">
+                <p class="label">Population</p>
+                <p id="population"></p>
+            </div>
+
+            <div class="info-box">
+                <p class="label">Region</p>
+                <p id="region"></p>
+            </div>
+
+            <div class="info-box">
+                <p class="label">Currency</p>
+                <p id="currency"></p>
+            </div>
+
+            <div class="info-box">
+                <p class="label">Languages</p>
+                <p id="languages"></p>
+            </div>
+
+            <div class="info-box">
+                <p class="label">Area</p>
+                <p id="area"></p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        function searchCountry() {
+
+            var countryName =
+                document.getElementById("countryInput").value;
+
+
+            // Empty input check
+            if (countryName === "") {
+
+                alert("Please enter a country name.");
+
+                return;
+            }
+
+
+            // Loader show
+            document.getElementById("loader").style.display = "block";
+
+
+            // Old data and error hide
+            document.getElementById("country").style.display = "none";
+
+            document.getElementById("error").style.display = "none";
+
+
+            // API call
+            fetch(
+                "https://restcountries.com/v3.1/name/"
+                + countryName
+            )
+
+
+            .then(function(response) {
+
+                if (!response.ok) {
+
+                    throw new Error("Country not found");
+                }
+
+                return response.json();
+
+            })
+
+
+            .then(function(data) {
+
+                // First country result
+                var country = data[0];
+
+
+                // Loader hide
+                document.getElementById("loader").style.display =
+                    "none";
+
+
+                // Country section show
+                document.getElementById("country").style.display =
+                    "block";
+
+
+                // Country name
+                document.getElementById("countryName").innerText =
+                    country.name.common;
+
+
+                // Flag
+                document.getElementById("flag").src =
+                    country.flags.png;
+
+
+                // Capital
+                document.getElementById("capital").innerText =
+                    country.capital
+                    ? country.capital[0]
+                    : "N/A";
+
+
+                // Population
+                document.getElementById("population").innerText =
+                    country.population.toLocaleString();
+
+
+                // Region
+                document.getElementById("region").innerText =
+                    country.region;
+
+
+                // Area
+                document.getElementById("area").innerText =
+                    country.area.toLocaleString() + " km²";
+
+
+                // Currency
+                var currencyName = "N/A";
+
+                if (country.currencies) {
+
+                    var currencyCode =
+                        Object.keys(country.currencies)[0];
+
+                    currencyName =
+                        country.currencies[currencyCode].name;
+                }
+
+                document.getElementById("currency").innerText =
+                    currencyName;
+
+
+                // Languages
+                var languageNames = "N/A";
+
+                if (country.languages) {
+
+                    languageNames =
+                        Object.values(country.languages).join(", ");
+                }
+
+                document.getElementById("languages").innerText =
+                    languageNames;
+
+            })
+
+
+            .catch(function(error) {
+
+                console.log(error);
+
+
+                // Loader hide
+                document.getElementById("loader").style.display =
+                    "none";
+
+
+                // Error show
+                document.getElementById("error").style.display =
+                    "block";
+
+            });
+
+        }
+
+    </script>
+
+</body>
+</html>

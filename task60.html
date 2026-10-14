@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Star Rating</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .rating-box {
+            background-color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+        }
+
+        .stars {
+            margin: 20px 0;
+        }
+
+        .star {
+            font-size: 40px;
+            color: #ccc;
+            cursor: pointer;
+        }
+
+        .star.active {
+            color: gold;
+        }
+
+        #result {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="rating-box">
+
+        <h2>Rate Our Website</h2>
+
+        <div class="stars">
+
+            <span class="star" onclick="giveRating(1)">★</span>
+
+            <span class="star" onclick="giveRating(2)">★</span>
+
+            <span class="star" onclick="giveRating(3)">★</span>
+
+            <span class="star" onclick="giveRating(4)">★</span>
+
+            <span class="star" onclick="giveRating(5)">★</span>
+
+        </div>
+
+        <p id="result">No rating selected</p>
+
+        <a href="task1.html">Back</a>
+
+    </div>
+
+
+    <script>
+
+        function giveRating(rating) {
+
+            var stars = document.querySelectorAll(".star");
+
+            // Sabhi stars ko reset karo
+            for (var i = 0; i < stars.length; i++) {
+                stars[i].classList.remove("active");
+            }
+
+            // Selected rating ke according stars ko active karo
+            for (var i = 0; i < rating; i++) {
+                stars[i].classList.add("active");
+            }
+
+            // Rating show karo
+            document.getElementById("result").innerText =
+                "You selected " + rating + " out of 5 stars";
+        }
+
+    </script>
+
+</body>
+
+</html>

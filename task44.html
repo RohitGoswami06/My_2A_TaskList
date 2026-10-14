@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Number Guessing Game</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        .game-box {
+            width: 350px;
+            margin: auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        input {
+            padding: 10px;
+            width: 200px;
+            margin: 15px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #result {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="game-box">
+
+        <h2>Number Guessing Game</h2>
+
+        <p>Guess a number between 1 and 10</p>
+
+        <input 
+            type="number" 
+            id="guess"
+            placeholder="Enter your number"
+        >
+
+        <br>
+
+        <button onclick="checkGuess()">Guess</button>
+
+        <p id="result"></p>
+
+        <a href="task1.html">back</a>
+
+    </div>
+
+
+    <script>
+
+        // Computer will choose a random number from 1 to 10
+        let randomNumber = Math.floor(Math.random() * 10) + 1;
+
+        function checkGuess() {
+
+            let guess = document.getElementById("guess").value;
+            let result = document.getElementById("result");
+
+            if (guess == randomNumber) {
+
+                result.innerText = "Correct! You guessed the number.";
+
+            }
+            else if (guess < randomNumber) {
+
+                result.innerText = "Too low! Try again.";
+
+            }
+            else {
+
+                result.innerText = "Too high! Try again.";
+
+            }
+        }
+
+    </script>
+
+</body>
+</html>

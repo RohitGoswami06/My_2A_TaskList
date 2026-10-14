@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dark Mode</title>
+
+    <style>
+        :root {
+            --bg-color: white;
+            --text-color: black;
+            --card-color: #f2f2f2;
+        }
+
+        #dark-mode:checked ~ .page {
+            --bg-color: #222;
+            --text-color: white;
+            --card-color: #333;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial;
+        }
+
+        .page {
+            min-height: 100vh;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 30px;
+        }
+
+        .toggle {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: var(--card-color);
+            cursor: pointer;
+        }
+
+        .card {
+            background-color: var(--card-color);
+            padding: 20px;
+            margin-top: 30px;
+            width: 300px;
+        }
+
+        #dark-mode {
+            display: none;
+        }
+        
+        a{
+            color: var(--text-color);
+            text-decoration: none;
+        
+        }
+    </style>
+</head>
+
+<body>
+
+    <input type="checkbox" id="dark-mode">
+
+    <div class="page">
+
+        <label for="dark-mode" class="toggle">
+            🌙 Dark Mode
+        </label>
+
+        <h1>My Website</h1>
+
+        <div class="card">
+            <h2>Welcome</h2>
+            <p>This is a simple dark mode UI.</p>
+            <a href="task1.html">Back</a>
+        </div>
+
+    </div>
+
+</body>
+</html>

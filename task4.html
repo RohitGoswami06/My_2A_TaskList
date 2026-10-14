@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Responsive Navbar</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #333;
+            padding: 15px 30px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .links a:hover {
+            color: #ccc;
+        }
+
+        main {
+            text-align: center;
+            flex: 1;
+            min-height: 100vh;
+            margin-top: 100px;
+
+        }
+
+        footer {
+            display: flex;
+            justify-content: center;
+            /* align-items: center; */
+        }
+
+        .back a{
+            color: white;
+            height: 15px;
+            width: 15px;
+            background-color: blue;
+            padding: 3px;
+            border-radius: 3px;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+
+            nav {
+                padding: 15px;
+            }
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .links {
+                flex-direction: column;
+                text-align: center;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Landmark -->
+    <header>
+        <nav aria-label="Main navigation">
+            <div class="navbar">
+
+                <div class="logo">
+                    MyWebsite
+                </div>
+
+                <!-- Navigation links -->
+                <ul class="links">
+                    <li>
+                        <a href="#">Home</a>
+                    </li>
+
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+
+                    <li>
+                        <a href="#">Services</a>
+                    </li>
+
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+
+                    <li class="back">
+                        <a href="task1.html ">Back</a>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Landmark -->
+    <main>
+        <h1>Welcome to My Website</h1>
+        <p>This is the main content of the webpage.</p>
+    </main>
+
+    <!-- Footer Landmark -->
+    <footer>
+        <p>© 2026 MyWebsite</p>
+    </footer>
+
+</body>
+
+</html>
+```

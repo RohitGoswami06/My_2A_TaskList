@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Todo List</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .todo-box {
+            width: 400px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        input {
+            width: 60%;
+            padding: 10px;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        ul {
+            padding: 0;
+            list-style: none;
+        }
+
+        li {
+            background-color: #eeeeee;
+            margin: 10px 0;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .delete-btn {
+            background-color: red;
+        }
+
+        .edit-btn {
+            background-color: green;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="todo-box">
+
+        <h2>My Todo List</h2>
+
+        <input 
+            type="text" 
+            id="todoInput" 
+            placeholder="Enter your task"
+        >
+
+        <button onclick="addTodo()">Add</button>
+
+        <ul id="todoList"></ul>
+
+        <a href="task1.html">Back</a>
+
+    </div>
+
+
+    <script>
+
+        // CREATE
+        function addTodo() {
+
+            let input = document.getElementById("todoInput");
+            let task = input.value;
+
+            if (task == "") {
+                alert("Please enter a task");
+                return;
+            }
+
+            // Create a new list item
+            let li = document.createElement("li");
+
+            li.innerHTML = `
+                <span>${task}</span>
+
+                <div>
+                    <button class="edit-btn" onclick="editTodo(this)">
+                        Edit
+                    </button>
+
+                    <button class="delete-btn" onclick="deleteTodo(this)">
+                        Delete
+                    </button>
+                </div>
+            `;
+
+            document.getElementById("todoList").appendChild(li);
+
+            input.value = "";
+        }
+
+
+        // DELETE
+        function deleteTodo(button) {
+
+            button.parentElement.parentElement.remove();
+
+        }
+
+
+        // UPDATE
+        function editTodo(button) {
+
+            let li = button.parentElement.parentElement;
+
+            let oldTask = li.querySelector("span").innerText;
+
+            let newTask = prompt("Edit your task:", oldTask);
+
+            if (newTask != null && newTask != "") {
+
+                li.querySelector("span").innerText = newTask;
+
+            }
+        }
+
+    </script>
+
+</body>
+</html>

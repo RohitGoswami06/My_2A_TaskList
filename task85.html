@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>API Pagination</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            font-size: 20px;
+            text-transform: capitalize;
+        }
+
+        .card p {
+            color: #555;
+            line-height: 1.5;
+        }
+
+        #loader {
+            text-align: center;
+            font-size: 18px;
+            margin: 20px;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .pagination button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #222;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .pagination button:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        #pageNumber {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Posts</h1>
+
+    <a href="task1.html">Back</a>
+
+    <!-- Loader -->
+    <div id="loader">
+        Loading...
+    </div>
+
+    <!-- Posts -->
+    <div id="posts"></div>
+
+
+    <!-- Pagination -->
+    <div class="pagination">
+
+        <button id="previousBtn" onclick="previousPage()">
+            Previous
+        </button>
+
+        <span id="pageNumber">
+            Page 1
+        </span>
+
+        <button id="nextBtn" onclick="nextPage()">
+            Next
+        </button>
+
+    </div>
+
+
+    <script>
+
+        // Current page
+        var currentPage = 1;
+
+        // Kitne posts ek page par
+        var postsPerPage = 6;
+
+
+        // API se data fetch karna
+        function getPosts() {
+
+            document.getElementById("loader").style.display = "block";
+
+            document.getElementById("posts").innerHTML = "";
+
+
+            fetch(
+                "https://jsonplaceholder.typicode.com/posts"
+                + "?_page=" + currentPage
+                + "&_limit=" + postsPerPage
+            )
+
+            .then(function(response) {
+
+                return response.json();
+
+            })
+
+            .then(function(data) {
+
+                document.getElementById("loader").style.display = "none";
+
+
+                var posts = document.getElementById("posts");
+
+
+                // API data ko cards me display karna
+                for (var i = 0; i < data.length; i++) {
+
+                    var card = document.createElement("div");
+
+                    card.className = "card";
+
+                    card.innerHTML = `
+                        <h2>${data[i].title}</h2>
+                        <p>${data[i].body}</p>
+                    `;
+
+                    posts.appendChild(card);
+                }
+
+
+                // Page number update
+                document.getElementById("pageNumber").innerText =
+                    "Page " + currentPage;
+
+
+                // Previous button disable
+                if (currentPage === 1) {
+
+                    document.getElementById("previousBtn").disabled = true;
+
+                } else {
+
+                    document.getElementById("previousBtn").disabled = false;
+                }
+
+
+                // Next button disable
+                if (data.length < postsPerPage) {
+
+                    document.getElementById("nextBtn").disabled = true;
+
+                } else {
+
+                    document.getElementById("nextBtn").disabled = false;
+                }
+
+            })
+
+            .catch(function(error) {
+
+                document.getElementById("loader").style.display = "none";
+
+                document.getElementById("posts").innerHTML =
+                    "<p>Data load nahi ho saka.</p>";
+
+                console.log(error);
+
+            });
+        }
+
+
+        // Next page
+        function nextPage() {
+
+            currentPage++;
+
+            getPosts();
+        }
+
+
+        // Previous page
+        function previousPage() {
+
+            if (currentPage > 1) {
+
+                currentPage--;
+
+                getPosts();
+            }
+        }
+
+
+        // First page load
+        getPosts();
+
+    </script>
+
+</body>
+</html>

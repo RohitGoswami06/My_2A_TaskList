@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Accessible Dropdown</title>
+
+    <style>
+
+        /* Page */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f2f4f7;
+        }
+
+        /* Navbar */
+        nav {
+            background-color: #222;
+            padding: 15px 40px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Logo */
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Menu */
+        .menu {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Normal links */
+        .menu a {
+            color: white;
+            text-decoration: none;
+            padding: 8px;
+        }
+
+        .menu a:hover {
+            color: #00bcd4;
+        }
+
+        .menu li{
+            display: flex;
+            align-items: center;
+        }
+
+        /* Dropdown */
+        details {
+            position: relative;
+        }
+
+        /* Dropdown button */
+        summary {
+            color: white;
+            cursor: pointer;
+            padding: 8px;
+            list-style: none;
+        }
+
+        summary:hover {
+            color: #00bcd4;
+        }
+
+        /* Remove default arrow */
+        /* summary::-webkit-details-marker {
+            display: none;
+        } */
+
+        /* Add our arrow */
+        summary::after {
+            content: " ▼";
+            font-size: 12px;
+        }
+
+        /* Dropdown box */
+        .dropdown-menu {
+            position: absolute;
+            top: 40px;
+            left: 0;
+
+            width: 170px;
+            background-color: white;
+
+            padding: 8px 0;
+            border-radius: 6px;
+
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Dropdown links */
+        .dropdown-menu a {
+            display: block;
+            color: #333;
+            padding: 10px 15px;
+        }
+
+        .dropdown-menu a:hover,
+        .dropdown-menu a:focus {
+            background-color: #eeeeee;
+            color: #00a6bb;
+            outline: none;
+        }
+
+        /* Keyboard focus */
+        summary:focus {
+            outline: 2px solid #00bcd4;
+            outline-offset: 3px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <nav>
+
+        <div class="logo">
+            MyWebsite
+        </div>
+
+        <ul class="menu">
+
+            <li>
+                <a href="#">Home</a>
+            </li>
+
+            <li>
+                <a href="#">About</a>
+            </li>
+
+           
+
+            <!-- Dropdown -->
+            <li>
+
+                <details>
+
+                    <summary>
+                        Services
+                    </summary>
+
+                    <div class="dropdown-menu">
+
+                        <a href="#">Web Design</a>
+                        <a href="#">Web Development</a>
+                        <a href="#">JavaScript</a>
+                        <a href="#">UI Design</a>
+
+                    </div>
+
+                </details>
+
+            </li>
+
+            <li>
+                <a href="#">Contact</a>
+            </li>
+
+             <li>
+                <a href="task1.html">Back</a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</body>
+
+</html>
+

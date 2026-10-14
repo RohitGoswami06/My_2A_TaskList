@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>student marks table </title>
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+        }
+
+        .Result {
+            height: 460px;
+            width: 600px;
+            border: 5px double black;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        caption {
+
+            height: 40px;
+            padding-top: 20px;
+            font-weight: bolder;
+            border-top: 5px double black;
+            border-right: 5px double black;
+            border-left: 5px double black;
+        }
+
+        tr th,
+        tr td {
+            border: 2px solid black;
+        }
+
+        .js {
+            width: 70px;
+            height: 70px;
+        }
+
+        tfoot {
+
+            height: 80px;
+            /* border-top: 5px double black; */
+            border-top: 5px double black;
+            border-right: 5px double black;
+            border-left: 5px double black;
+        }
+
+        tfoot td {
+            border: none;
+            padding: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <a href="task1.html"> Back</a>
+
+    <!-- <div class="Marcheet"   > -->
+
+
+    <table class="Result">
+        <caption> STUDENT MARKS REPORT</caption>
+
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Roll No.</th>
+                <th class="js">HTML</th>
+                <th class="js">CSS</th>
+                <th class="js">JS</th>
+                <th class="js">Total</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>Rohit</td>
+                <td>101</td>
+                <td>85</td>
+                <td>78</td>
+                <td>84</td>
+                <td id="total"></td>
+
+
+            </tr>
+            <tr>
+                <td>Krishna</td>
+                <td>102</td>
+                <td>80</td>
+                <td>68</td>
+                <td>74</td>
+                <td class="total"></td>
+
+
+            </tr>
+            <tr>
+
+                <td>Dhruv</td>
+                <td>103</td>
+                <td>69</td>
+                <td>70</td>
+                <td>78</td>
+                <td class="total"></td>
+
+
+            </tr>
+            <tr>
+                <td>Akash</td>
+                <td>104</td>
+                <td>83</td>
+                <td>72</td>
+                <td>78</td>
+                <td class="total"></td>
+
+
+            </tr>
+
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td>Total Students: 4</td>
+                <td>Average: <span id="average"></span></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <!-- </div>  -->
+    <script>
+
+        let rows = document.querySelectorAll("tbody tr");
+
+        rows.forEach(function (row) {
+
+            let html = Number(row.children[2].innerText);
+            let css = Number(row.children[3].innerText);
+            let js = Number(row.children[4].innerText);
+
+            let total = html + css + js;
+
+            row.children[5].innerText = total;
+        });
+
+        let total = 0;
+
+        rows.forEach(function (row) {
+
+            let html = Number(row.children[2].innerText);
+            let css = Number(row.children[3].innerText);
+            let js = Number(row.children[4].innerText);
+
+            let studentTotal = html + css + js;
+
+            row.children[5].innerText = studentTotal;
+
+            total = total + studentTotal;
+        });
+
+        let average = total / rows.length;
+
+        document.getElementById("average").innerText = average.toFixed(2);
+
+    </script>
+
+</body>
+
+</html>

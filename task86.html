@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>API Search</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .search-box {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 30px auto;
+            max-width: 600px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .search-box button {
+            padding: 12px 20px;
+            border: none;
+            background-color: #222;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .search-box button:hover {
+            background-color: #444;
+        }
+
+        #loader {
+            display: none;
+            text-align: center;
+            margin: 20px;
+        }
+
+        #error {
+            display: none;
+            text-align: center;
+            color: red;
+        }
+
+        #posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            font-size: 20px;
+            text-transform: capitalize;
+        }
+
+        .card p {
+            color: #555;
+            line-height: 1.5;
+        }
+
+        #noResult {
+            display: none;
+            text-align: center;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Search Posts</h1>
+    <a href="task1.html">Back</a>
+
+    <!-- Search Box -->
+
+    <div class="search-box">
+
+        <input type="text" id="searchInput" placeholder="Search post...">
+
+        <button onclick="searchPosts()">
+            Search
+        </button>
+
+    </div>
+
+
+    <!-- Loader -->
+
+    <div id="loader">
+        Searching...
+    </div>
+
+
+    <!-- Error -->
+
+    <div id="error">
+        Something went wrong. Please try again.
+    </div>
+
+
+    <!-- No Result -->
+
+    <p id="noResult">
+        No posts found.
+    </p>
+
+
+    <!-- Posts -->
+
+    <div id="posts"></div>
+
+
+    <script>
+
+        function searchPosts() {
+
+            var searchText =
+                document.getElementById("searchInput").value;
+
+
+            // Empty search check
+            if (searchText === "") {
+
+                alert("Please enter something to search.");
+
+                return;
+            }
+
+
+            // Old data remove
+            document.getElementById("posts").innerHTML = "";
+
+
+            // Hide old messages
+            document.getElementById("error").style.display = "none";
+
+            document.getElementById("noResult").style.display = "none";
+
+
+            // Show loader
+            document.getElementById("loader").style.display = "block";
+
+
+            // API search
+            fetch(
+                "https://jsonplaceholder.typicode.com/posts"
+                + "?title_like=" + searchText
+            )
+
+
+                .then(function (response) {
+
+                    if (!response.ok) {
+
+                        throw new Error("API Error");
+                    }
+
+                    return response.json();
+
+                })
+
+
+                .then(function (data) {
+
+                    // Hide loader
+                    document.getElementById("loader").style.display = "none";
+
+
+                    // Agar result nahi mila
+                    if (data.length === 0) {
+
+                        document.getElementById("noResult").style.display =
+                            "block";
+
+                        return;
+                    }
+
+
+                    var posts =
+                        document.getElementById("posts");
+
+
+                    // Results display
+                    for (var i = 0; i < data.length; i++) {
+
+                        var card =
+                            document.createElement("div");
+
+                        card.className = "card";
+
+
+                        card.innerHTML = `
+                        <h2>${data[i].title}</h2>       
+                        <p>${data[i].body}</p>
+                    `;
+
+
+                        posts.appendChild(card);
+                    }
+
+                })
+
+
+                .catch(function (error) {
+
+                    console.log(error);
+
+
+                    // Hide loader
+                    document.getElementById("loader").style.display = "none";
+
+
+                    // Show error
+                    document.getElementById("error").style.display = "block";
+
+                });
+
+        }
+
+    </script>
+
+</body>
+
+</html>

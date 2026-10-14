@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Image Preview</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 50px;
+        }
+
+        .box {
+            width: 400px;
+            max-width: 100%;
+            margin: auto;
+            padding: 25px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+            text-align: center;
+        }
+
+        input {
+            margin: 20px 0;
+        }
+
+        #preview {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            display: none;
+            margin: auto;
+        }
+
+        #message {
+            margin-top: 15px;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+
+        <h2>Image Preview</h2>
+
+        <input
+            type="file"
+            id="imageInput"
+            accept="image/*"
+            onchange="showPreview()"
+        >
+
+        <img id="preview" alt="Image Preview">
+
+        <p id="message">Select an image to see preview</p>
+
+        <a href="task1.html">Back</a>
+
+    </div>
+
+
+    <script>
+
+        function showPreview() {
+
+            var input = document.getElementById("imageInput");
+            var preview = document.getElementById("preview");
+            var message = document.getElementById("message");
+
+            // Check karo ki file select hui hai ya nahi
+            if (input.files.length > 0) {
+
+                var file = input.files[0];
+
+                // File ko image preview ke liye read karo
+                var reader = new FileReader();
+
+                reader.onload = function(event) {
+
+                    preview.src = event.target.result;
+
+                    preview.style.display = "block";
+
+                    message.innerText = "Image preview:";
+
+                };
+
+                reader.readAsDataURL(file);
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>

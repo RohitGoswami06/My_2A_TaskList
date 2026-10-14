@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dynamic Table</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .box {
+            width: 600px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        input {
+            padding: 10px;
+            margin: 5px;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 30px;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        .delete-btn {
+            background-color: red;
+        }
+        </style>
+</head>
+
+<body>
+    
+    <div class="box">
+        
+        <a href="task1.html">back</a>
+        <h2>Student Table</h2>
+
+        <input
+            type="text"
+            id="name"
+            placeholder="Enter name"
+        >
+
+        <input
+            type="number"
+            id="age"
+            placeholder="Enter age"
+        >
+
+        <button onclick="addRow()">
+            Add Student
+        </button>
+
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody id="studentTable">
+
+            </tbody>
+
+
+        </table>
+
+    </div>
+
+
+    <script>
+
+        function addRow() {
+
+            // Get input values
+            let name = document.getElementById("name").value;
+            let age = document.getElementById("age").value;
+
+            // Check empty fields
+            if (name == "" || age == "") {
+
+                alert("Please enter name and age.");
+
+                return;
+            }
+
+
+            // Create a new table row
+            let row = document.createElement("tr");
+
+
+            // Create name cell
+            let nameCell = document.createElement("td");
+
+            nameCell.innerText = name;
+
+
+            // Create age cell
+            let ageCell = document.createElement("td");
+
+            ageCell.innerText = age;
+
+
+            // Create action cell
+            let actionCell = document.createElement("td");
+
+
+            // Create delete button
+            let deleteButton = document.createElement("button");
+
+            deleteButton.innerText = "Delete";
+
+            deleteButton.className = "delete-btn";
+
+
+            // Delete row when button is clicked
+            deleteButton.onclick = function() {
+
+                row.remove();
+
+            };
+
+
+            // Add button to action cell
+            actionCell.appendChild(deleteButton);
+
+
+            // Add cells to row
+            row.appendChild(nameCell);
+            row.appendChild(ageCell);
+            row.appendChild(actionCell);
+
+
+            // Add row to table
+            document
+                .getElementById("studentTable")
+                .appendChild(row);
+
+
+            // Clear input fields
+            document.getElementById("name").value = "";
+            document.getElementById("age").value = "";
+        }
+
+    </script>
+
+</body>
+</html>

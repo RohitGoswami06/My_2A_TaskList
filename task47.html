@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Word and Character Counter</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .box {
+            width: 500px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        textarea {
+            width: 90%;
+            height: 150px;
+            padding: 10px;
+            font-size: 16px;
+            resize: none;
+        }
+
+        .result {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .count {
+            background-color: #eeeeee;
+            padding: 15px 25px;
+            border-radius: 5px;
+        }
+
+        .count h3 {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+
+        <h2>Word & Character Counter</h2>
+
+        <textarea
+            id="textInput"
+            placeholder="Type something here..."
+            oninput="countText()"
+        ></textarea>
+
+        <div class="result">
+
+            <div class="count">
+                <h3 id="characterCount">0</h3>
+                <p>Characters</p>
+            </div>
+
+            <div class="count">
+                <h3 id="wordCount">0</h3>
+                <p>Words</p>
+            </div>
+
+        </div>
+
+        <a href="task1.html">Back</a>
+
+    </div>
+
+
+    <script>
+
+        function countText() {
+
+            let text = document.getElementById("textInput").value;
+
+            // Count characters
+            let characters = text.length;
+
+            // Count words
+            let words = text.trim();
+
+            if (words == "") {
+                words = 0;
+            }
+            else {
+                words = words.split(/\s+/).length;
+            }
+
+            // Show result
+            document.getElementById("characterCount").innerText = characters;
+
+            document.getElementById("wordCount").innerText = words;
+        }
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Hide Password</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .box {
+            background-color: white;
+            padding: 30px;
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+        }
+
+        input[type="password"],
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+        }
+
+        label {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+        <a href="task1.html">Back</a>
+
+        <h2>Login</h2>
+
+        <input type="password" id="password" placeholder="Enter Password">
+
+        <label>
+            <input type="checkbox" id="showPassword" onclick="togglePassword()">
+            Show Password
+        </label>
+
+
+    </div>
+
+
+    <script>
+
+        function togglePassword() {
+
+            var password = document.getElementById("password");
+            var checkbox = document.getElementById("showPassword");
+
+            if (checkbox.checked) {
+                password.type = "text";
+            } else {
+                password.type = "password";
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>

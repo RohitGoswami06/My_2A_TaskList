@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Random Quote Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .quote-container {
+            width: 450px;
+            padding: 30px;
+            text-align: center;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+        }
+
+        .quote-container h2 {
+            margin-bottom: 25px;
+        }
+
+        #quote {
+            font-size: 20px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        #author {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        #newQuoteBtn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        #newQuoteBtn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="quote-container">
+
+        <h2>Random Quote Generator</h2>
+
+        <p id="quote">
+            Click the button to get a quote.
+        </p>
+
+        <p id="author"></p>
+
+        <button id="newQuoteBtn">
+            New Quote
+        </button>
+
+        <a href="task1.html" class="btn btn-primary">Back</a>
+
+    </div>
+
+
+    <script>
+
+        // Quotes data
+        const quotes = [
+            {
+                quote: "The only way to do great work is to love what you do.",
+                author: "Steve Jobs"
+            },
+            {
+                quote: "Believe you can and you're halfway there.",
+                author: "Theodore Roosevelt"
+            },
+            {
+                quote: "Success is not final, failure is not fatal.",
+                author: "Winston Churchill"
+            },
+            {
+                quote: "It always seems impossible until it's done.",
+                author: "Nelson Mandela"
+            },
+            {
+                quote: "Dream big and dare to fail.",
+                author: "Norman Vincent Peale"
+            }
+        ];
+
+
+        const quoteElement = document.getElementById("quote");
+        const authorElement = document.getElementById("author");
+        const button = document.getElementById("newQuoteBtn");
+
+
+        function generateQuote() {
+
+            // Generate random index
+            let randomIndex = Math.floor(
+                Math.random() * quotes.length
+            );
+
+            // Get random quote
+            let randomQuote = quotes[randomIndex];
+
+            // Display quote
+            quoteElement.innerText = '"' + randomQuote.quote + '"';
+
+            // Display author
+            authorElement.innerText =
+                "- " + randomQuote.author;
+        }
+
+
+        button.addEventListener("click", generateQuote);
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Accordion</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 50px;
+        }
+
+        .accordion {
+            width: 600px;
+            max-width: 100%;
+            margin: auto;
+        }
+
+        .item {
+            background-color: white;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 0 5px #ccc;
+        }
+
+        .question {
+            padding: 15px;
+            cursor: pointer;
+            background-color: #333;
+            color: white;
+        }
+
+        .answer {
+            display: none;
+            padding: 15px;
+            background-color: white;
+        }
+
+        .answer.show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="accordion">
+
+        <!-- Item 1 -->
+        <div class="item">
+            <div class="question" onclick="toggleAnswer(0)">
+                What is JavaScript?
+            </div>
+
+            <div class="answer">
+                JavaScript is a programming language used to make web pages interactive.
+            </div>
+        </div>
+
+
+        <!-- Item 2 -->
+        <div class="item">
+            <div class="question" onclick="toggleAnswer(1)">
+                What is HTML?
+            </div>
+
+            <div class="answer">
+                HTML is used to create the structure of a web page.
+            </div>
+        </div>
+
+
+        <!-- Item 3 -->
+        <div class="item">
+            <div class="question" onclick="toggleAnswer(2)">
+                What is CSS?
+            </div>
+
+            <div class="answer">
+                CSS is used to style and design a web page.
+            </div>
+        </div>
+
+        <a href="task1.html">Back</a>
+    </div>
+
+
+    <script>
+
+        function toggleAnswer(index) {
+
+            // Saare answers ko select karo
+            var answers = document.querySelectorAll(".answer");
+
+            // Selected answer ki class check karo
+            if (answers[index].classList.contains("show")) {
+
+                // Agar already open hai to close karo
+                answers[index].classList.remove("show");
+
+            } else {
+
+                // Agar closed hai to open karo
+                answers[index].classList.add("show");
+
+            }
+        }
+
+    </script>
+
+</body>
+</html>

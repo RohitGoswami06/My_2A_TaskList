@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Registration Form</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            width: 400px;
+            margin: auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #aaa;
+            border-radius: 4px;
+            font-size: 15px;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: 2px solid #333;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #333;
+            color: white;
+            font-size: 16px;
+            cursor: pointer; 
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <a href="task1.html">Back</a>
+
+    <main class="container">
+
+        <h1>Student Registration</h1>
+
+        <form>
+
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input 
+                    type="text" 
+                    id="name" 
+                    name="name"
+                    aria-label="Student full name"
+                    placeholder="Enter your full name"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email"
+                    aria-label="Student email address"
+                    placeholder="Enter your email"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input 
+                    type="tel" 
+                    id="phone" 
+                    name="phone"
+                    aria-label="Student phone number"
+                    placeholder="Enter your phone number">
+            </div>
+
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input 
+                    type="date" 
+                    id="dob" 
+                    name="dob"
+                    aria-label="Student date of birth">
+            </div>
+
+            <div class="form-group">
+                <label for="course">Select Course</label>
+
+                <select 
+                    id="course" 
+                    name="course"
+                    aria-label="Select student course"
+                    required>
+
+                    <option value="">-- Select Course --</option>
+                    <option value="bca">BCA</option>
+                    <option value="btech">B.Tech</option>
+                    <option value="bba">BBA</option>
+                    <option value="mca">MCA</option>
+
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address</label>
+
+                <textarea 
+                    id="address"
+                    name="address"
+                    aria-label="Student address"
+                    rows="4"
+                    placeholder="Enter your address">
+                </textarea>
+            </div>
+
+            <button 
+                type="submit" aria-label="Submit student registration form">
+                Register
+            </button>
+
+        </form>
+
+    </main>
+
+</body>
+
+</html>
+```

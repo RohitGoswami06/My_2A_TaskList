@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Event Delegation</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        .cards {
+            width: 700px;
+            margin: auto;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .card {
+            width: 180px;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px #ccc;
+        }
+
+        .card:hover {
+            background-color: #e9f3ff;
+        }
+
+        #result {
+            margin-top: 30px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Event Delegation Example</h1>
+
+    <!-- Parent -->
+    <div class="cards" id="cards">
+
+        <!-- Child Cards -->
+        <div class="card" data-name="HTML">
+            <h2>HTML</h2>
+            <p>Click me</p>
+        </div>
+
+        <div class="card" data-name="CSS">
+            <h2>CSS</h2>
+            <p>Click me</p>
+        </div>
+
+        <div class="card" data-name="JavaScript">
+            <h2>JavaScript</h2>
+            <p>Click me</p>
+        </div>
+
+    </div>
+
+    <p id="result">Click on any card</p>
+
+    <a href="task1.html">back</a>
+
+
+    <script>
+
+        // Parent element
+        let cards = document.getElementById("cards");
+
+        // One event listener on parent
+        cards.addEventListener("click", function(event) {
+
+            // Check if clicked element is a card
+            if (event.target.closest(".card")) {
+
+                let card = event.target.closest(".card");
+
+                let name = card.getAttribute("data-name");
+
+                document.getElementById("result").innerText =
+                    "You clicked on " + name;
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>

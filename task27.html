@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+    <!-- Navbar -->
+    <nav class="navbar bg-dark navbar-dark">
+
+        <div class="container-fluid">
+
+            <a class="navbar-brand fw-bold" href="#">
+                Admin Dashboard
+            </a>
+
+            <span class="text-white">
+                Admin
+            </span>
+
+        </div>
+
+    </nav>
+
+
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <!-- Sidebar -->
+            <aside class="col-md-3 col-lg-2 bg-white min-vh-100 p-3">
+
+                <h5 class="fw-bold mb-4">
+                    Menu
+                </h5>
+
+                <div class="d-grid gap-2">
+
+                    <a href="#" class="btn btn-primary text-start">
+                        Dashboard
+                    </a>
+
+                    <a href="#" class="btn btn-light text-start">
+                        Users
+                    </a>
+
+                    <a href="#" class="btn btn-light text-start">
+                        Products
+                    </a>
+
+                    <a href="#" class="btn btn-light text-start">
+                        Orders
+                    </a>
+
+                    <a href="#" class="btn btn-light text-start">
+                        Settings
+                    </a>
+
+                    <a href="task1.html" class="btn btn-light text-start">
+                        Back
+                    </a>
+
+                </div>
+
+            </aside>
+
+
+            <!-- Main Content -->
+            <main class="col-md-9 col-lg-10 p-4">
+
+                <h2 class="fw-bold mb-4">
+                    Dashboard
+                </h2>
+
+
+                <!-- Statistics Cards -->
+                <div class="row g-4 mb-4">
+
+                    <div class="col-sm-6 col-lg-3">
+
+                        <div class="bg-white p-4 rounded shadow-sm">
+
+                            <h6 class="text-secondary">
+                                Total Users
+                            </h6>
+
+                            <h3 class="fw-bold">
+                                1,250
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-sm-6 col-lg-3">
+
+                        <div class="bg-white p-4 rounded shadow-sm">
+
+                            <h6 class="text-secondary">
+                                Products
+                            </h6>
+
+                            <h3 class="fw-bold">
+                                350
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-sm-6 col-lg-3">
+
+                        <div class="bg-white p-4 rounded shadow-sm">
+
+                            <h6 class="text-secondary">
+                                Orders
+                            </h6>
+
+                            <h3 class="fw-bold">
+                                890
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-sm-6 col-lg-3">
+
+                        <div class="bg-white p-4 rounded shadow-sm">
+
+                            <h6 class="text-secondary">
+                                Revenue
+                            </h6>
+
+                            <h3 class="fw-bold">
+                                $25,400
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Recent Orders -->
+                <div class="bg-white p-4 rounded shadow-sm">
+
+                    <h4 class="fw-bold mb-3">
+                        Recent Orders
+                    </h4>
+
+                    <div class="table-responsive">
+
+                        <table class="table table-hover">
+
+                            <thead class="table-dark">
+
+                                <tr>
+                                    <th>#</th>
+                                    <th>Customer</th>
+                                    <th>Product</th>
+                                    <th>Status</th>
+                                    <th>Amount</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+                                    <td>1</td>
+                                    <td>John</td>
+                                    <td>Laptop</td>
+                                    <td>
+                                        <span class="badge bg-success">
+                                            Completed
+                                        </span>
+                                    </td>
+                                    <td>$800</td>
+                                </tr>
+
+                                <tr>
+                                    <td>2</td>
+                                    <td>Sarah</td>
+                                    <td>Phone</td>
+                                    <td>
+                                        <span class="badge bg-warning text-dark">
+                                            Pending
+                                        </span>
+                                    </td>
+                                    <td>$500</td>
+                                </tr>
+
+                                <tr>
+                                    <td>3</td>
+                                    <td>Mike</td>
+                                    <td>Headphones</td>
+                                    <td>
+                                        <span class="badge bg-danger">
+                                            Cancelled
+                                        </span>
+                                    </td>
+                                    <td>$150</td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </main>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Live Search</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            padding-top: 60px;
+        }
+
+        .box {
+            width: 450px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        input {
+            width: 90%;
+            padding: 12px;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #eeeeee;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 5px;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+
+        <h2>Live Search</h2>
+
+        <input
+            type="text"
+            id="search"
+            placeholder="Search student..."
+            oninput="searchStudent()"
+        >
+
+        <ul id="studentList">
+
+            <li>Rohit</li>
+            <li>Rahul</li>
+            <li>Aman</li>
+            <li>Priya</li>
+            <li>Neha</li>
+            <li>Arjun</li>
+            <li>Vikas</li>
+            <li>Pooja</li>
+
+        </ul>
+
+
+        <a href="task1.html">Back</a>
+    </div>
+
+
+    <script>
+
+        function searchStudent() {
+
+            // Get search value
+            let searchText =
+                document.getElementById("search").value.toLowerCase();
+
+            // Get all list items
+            let students =
+                document.querySelectorAll("#studentList li");
+
+
+            // Check every student
+            for (let i = 0; i < students.length; i++) {
+
+                let studentName =
+                    students[i].innerText.toLowerCase();
+
+
+                // Check if search text exists
+                if (studentName.includes(searchText)) {
+
+                    students[i].style.display = "block";
+
+                }
+                else {
+
+                    students[i].style.display = "none";
+
+                }
+            }
+        }
+
+    </script>
+
+</body>
+</html>

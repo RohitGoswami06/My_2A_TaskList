@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Prime Number Checker</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        .box {
+            width: 350px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        input {
+            width: 80%;
+            padding: 12px;
+            margin: 15px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+
+        <h2>Prime Number Checker</h2>
+
+        <input 
+            type="number"
+            id="number"
+            placeholder="Enter a number"
+        >
+
+        <br>
+
+        <button onclick="checkPrime()">
+            Check
+        </button>
+
+        <p id="result"></p>
+        <a href="task1.html">back</a>
+
+    </div>
+
+
+    <script>
+
+        function checkPrime() {
+
+            let number = Number(document.getElementById("number").value);
+            let result = document.getElementById("result");
+
+            let isPrime = true;
+
+            // 1 and numbers below 1 are not prime
+            if (number < 2) {
+
+                isPrime = false;
+
+            }
+            else {
+
+                // Check if number is divisible by another number
+                for (let i = 2; i < number; i++) {
+
+                    if (number % i == 0) {
+
+                        isPrime = false;
+                        break;
+
+                    }
+                }
+            }
+
+            if (isPrime) {
+
+                result.innerText = number + " is a Prime Number.";
+
+            }
+            else {
+
+                result.innerText = number + " is Not a Prime Number.";
+
+            }
+        }
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Weather Application</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .weather-app {
+            background-color: white;
+            width: 400px;
+            max-width: 90%;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            margin-bottom: 25px;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .search-box button {
+            padding: 12px 18px;
+            border: none;
+            background-color: #0984e3;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .search-box button:hover {
+            background-color: #076bb5;
+        }
+
+        #loader {
+            display: none;
+            margin-top: 25px;
+            font-size: 18px;
+        }
+
+        #error {
+            display: none;
+            color: red;
+            margin-top: 20px;
+        }
+
+        #weather {
+            display: none;
+            margin-top: 25px;
+        }
+
+        #cityName {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        #temperature {
+            font-size: 45px;
+            font-weight: bold;
+            margin: 10px;
+        }
+
+        #condition {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .weather-info {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .info-box {
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 8px;
+            width: 45%;
+        }
+
+        .info-box p {
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="weather-app">
+
+        <a href="task1.html">Back</a>
+        <h1>Weather App</h1>
+
+
+
+        <!-- Search -->
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="cityInput"
+                placeholder="Enter city name"
+            >
+
+            <button onclick="getWeather()">
+                Search
+            </button>
+
+        </div>
+
+
+        <!-- Loader -->
+        <div id="loader">
+            Loading weather...
+        </div>
+
+
+        <!-- Error -->
+        <div id="error">
+            City not found. Please try again.
+        </div>
+
+
+        <!-- Weather Result -->
+        <div id="weather">
+
+            <h2 id="cityName"></h2>
+
+            <div id="temperature"></div>
+
+            <div id="condition"></div>
+
+
+            <div class="weather-info">
+
+                <div class="info-box">
+                    <p>Wind</p>
+                    <strong id="wind"></strong>
+                </div>
+
+                <div class="info-box">
+                    <p>Humidity</p>
+                    <strong id="humidity"></strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        function getWeather() {
+
+            var city = document.getElementById("cityInput").value;
+
+
+            // Empty input check
+            if (city === "") {
+
+                alert("Please enter a city name.");
+
+                return;
+            }
+
+
+            // Show loader
+            document.getElementById("loader").style.display = "block";
+
+            // Hide old result and error
+            document.getElementById("weather").style.display = "none";
+
+            document.getElementById("error").style.display = "none";
+
+
+            // First API: Find city location
+            fetch(
+                "https://geocoding-api.open-meteo.com/v1/search?name="
+                + city
+                + "&count=1&language=en&format=json"
+            )
+
+            .then(function(response) {
+
+                return response.json();
+
+            })
+
+            .then(function(locationData) {
+
+                // City nahi mili
+                if (!locationData.results) {
+
+                    throw new Error("City not found");
+                }
+
+
+                var location = locationData.results[0];
+
+                var latitude = location.latitude;
+
+                var longitude = location.longitude;
+
+
+                // Second API: Get weather
+                return fetch(
+                    "https://api.open-meteo.com/v1/forecast"
+                    + "?latitude=" + latitude
+                    + "&longitude=" + longitude
+                    + "&current=temperature_2m,relative_humidity_2m,wind_speed_10m"
+                    + "&timezone=auto"
+                );
+
+            })
+
+
+            .then(function(response) {
+
+                return response.json();
+
+            })
+
+
+            .then(function(weatherData) {
+
+                var current = weatherData.current;
+
+
+                // Hide loader
+                document.getElementById("loader").style.display = "none";
+
+
+                // Show weather
+                document.getElementById("weather").style.display = "block";
+
+
+                // Display data
+                document.getElementById("cityName").innerText =
+                    document.getElementById("cityInput").value;
+
+
+                document.getElementById("temperature").innerText =
+                    current.temperature_2m + " °C";
+
+
+                document.getElementById("condition").innerText =
+                    "Current Weather";
+
+
+                document.getElementById("wind").innerText =
+                    current.wind_speed_10m + " km/h";
+
+
+                document.getElementById("humidity").innerText =
+                    current.relative_humidity_2m + " %";
+
+            })
+
+
+            .catch(function(error) {
+
+                console.log(error);
+
+
+                // Hide loader
+                document.getElementById("loader").style.display = "none";
+
+
+                // Show error
+                document.getElementById("error").style.display = "block";
+
+            });
+
+        }
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Custom Dropdown</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 50px;
+        }
+
+        .dropdown {
+            width: 250px;
+            margin: auto;
+            position: relative;
+        }
+
+        .dropdown-button {
+            width: 100%;
+            padding: 12px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            width: 100%;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        .dropdown-menu div {
+            padding: 12px;
+            cursor: pointer;
+        }
+
+        .dropdown-menu div:hover {
+            background-color: #f2f2f2;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="dropdown">
+
+        <!-- Dropdown Button -->
+        <button class="dropdown-button" onclick="toggleDropdown()">
+            Select City
+        </button>
+
+
+        <!-- Dropdown Options -->
+        <div class="dropdown-menu" id="dropdownMenu">
+
+            <div onclick="selectOption('Bhopal')">
+                Bhopal
+            </div>
+
+            <div onclick="selectOption('Indore')">
+                Indore
+            </div>
+
+            <div onclick="selectOption('Delhi')">
+                Delhi
+            </div>
+
+            <div onclick="selectOption('Mumbai')">
+                Mumbai
+            </div>
+
+        </div>
+        <a href="task1.html">Back</a>
+
+    </div>
+
+
+    <script>
+
+        function toggleDropdown() {
+
+            var menu = document.getElementById("dropdownMenu");
+
+            menu.classList.toggle("show");
+
+        }
+
+
+        function selectOption(city) {
+
+            var button = document.querySelector(".dropdown-button");
+            var menu = document.getElementById("dropdownMenu");
+
+            // Selected city button me show karo
+            button.innerText = city;
+
+            // Dropdown close karo
+            menu.classList.remove("show");
+
+        }
+
+    </script>
+
+</body>
+
+</html>

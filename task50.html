@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Memory Game</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        .game {
+            width: 350px;
+            margin: auto;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .card {
+            height: 100px;
+            background-color: #007bff;
+            color: white;
+            font-size: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .card.matched {
+            background-color: green;
+        }
+
+        #message {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="game">
+
+        <h2>Memory Game</h2>
+
+        <p>Find the matching pairs!</p>
+
+        <div class="cards">
+
+            <div class="card" onclick="flipCard(this)">?</div>
+            <div class="card" onclick="flipCard(this)">?</div>
+            <div class="card" onclick="flipCard(this)">?</div>
+            <div class="card" onclick="flipCard(this)">?</div>
+            <div class="card" onclick="flipCard(this)">?</div>
+            <div class="card" onclick="flipCard(this)">?</div>
+
+        </div>
+
+        <p id="message"></p>
+
+        <a href="task1.html">back</a>
+
+    </div>
+
+
+    <script>
+
+        // Cards ke andar values
+        let values = ["🍎", "🍎", "🍌", "🍌", "🍇", "🍇"];
+
+        // Selected cards
+        let firstCard = null;
+        let secondCard = null;
+
+        // Game ko temporarily rokne ke liye
+        let lockGame = false;
+
+
+        function flipCard(card) {
+
+            // Agar game locked hai to kuch nahi hoga
+            if (lockGame) {
+                return;
+            }
+
+            // Agar card already open hai to kuch nahi hoga
+            if (card.innerText != "?") {
+                return;
+            }
+
+            // Card ki value find karo
+            // let cardNumber = document.querySelectorAll(".card").length;SSS
+
+            let cards = document.querySelectorAll(".card");
+
+            // Card ka index find karo
+            let index = 0;
+
+            for (let i = 0; i < cards.length; i++) {
+
+                if (cards[i] == card) {
+                    index = i;
+                }
+            }
+
+            // Card ko open karo
+            card.innerText = values[index];
+
+
+            // First card select
+            if (firstCard == null) {
+
+                firstCard = card;
+
+            }
+            // Second card select
+            else {
+
+                secondCard = card;
+
+                checkMatch();
+            }
+        }
+
+
+        function checkMatch() {
+
+            let firstValue = firstCard.innerText;
+            let secondValue = secondCard.innerText;
+
+            // Agar dono same hain
+            if (firstValue == secondValue) {
+
+                firstCard.classList.add("matched");
+                secondCard.classList.add("matched");
+
+                firstCard = null;
+                secondCard = null;
+
+                document.getElementById("message").innerText =
+                    "Match found!";
+
+            }
+            else {
+
+                lockGame = true;
+
+                document.getElementById("message").innerText =
+                    "Not a match!";
+
+                setTimeout(function() {
+
+                    firstCard.innerText = "?";
+                    secondCard.innerText = "?";
+
+                    firstCard = null;
+                    secondCard = null;
+
+                    lockGame = false;
+
+                }, 1000);
+            }
+        }
+
+    </script>
+
+</body>
+</html>

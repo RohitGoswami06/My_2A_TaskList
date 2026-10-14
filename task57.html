@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tab Switching</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 50px;
+        }
+
+        .tabs {
+            width: 500px;
+            margin: auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab-button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #ddd;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .tab-button.active {
+            background-color: black;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="tabs">
+
+        <!-- Tab Buttons -->
+        <div class="tab-buttons">
+
+            <button class="tab-button active" onclick="showTab('home', this)">
+                Home
+            </button>
+
+            <button class="tab-button" onclick="showTab('about', this)">
+                About
+            </button>
+
+            <button class="tab-button" onclick="showTab('contact', this)">
+                Contact
+            </button>
+
+        </div>
+
+
+        <!-- Tab Content -->
+
+        <div id="home" class="tab-content active">
+            <h2>Home</h2>
+            <p>Welcome to our website.</p>
+        </div>
+
+        <div id="about" class="tab-content">
+            <h2>About</h2>
+            <p>This is the About section.</p>
+        </div>
+
+        <div id="contact" class="tab-content">
+            <h2>Contact</h2>
+            <p>This is the Contact section.</p>
+        </div>
+
+        <a href="task1.html">Back</a>
+
+    </div>
+
+
+    <script>
+
+        function showTab(tabName, button) {
+
+            // Saare contents ko select karo
+            var contents = document.querySelectorAll(".tab-content");
+
+            // Saare buttons ko select karo
+            var buttons = document.querySelectorAll(".tab-button");
+
+
+            // Saare contents hide karo
+            for (var i = 0; i < contents.length; i++) {
+                contents[i].classList.remove("active");
+            }
+
+
+            // Saare buttons se active class remove karo
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove("active");
+            }
+
+
+            // Selected content show karo
+            document.getElementById(tabName).classList.add("active");
+
+
+            // Clicked button ko active karo
+            button.classList.add("active");
+        }
+
+    </script>
+
+</body>
+</html>

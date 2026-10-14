@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pricing Plans</title>
+
+    <style>
+        body {
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        /* Flexbox container */
+        .pricing-container {    
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        /* Pricing card */
+        .card {
+            background-color: white;
+            width: 220px;
+            padding: 25px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        .card h2 {
+            color: blue;
+        }
+
+        .price {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .card li {
+            margin: 15px 0;
+        }
+
+        button {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: darkblue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Choose Your Plan</h1>
+
+    <div class="pricing-container">
+
+        <!-- Basic Plan -->
+        <div class="card">
+            <h2>Basic</h2>
+
+            <p class="price">₹199</p>
+
+            <ul>
+                <li>5 GB Storage</li>
+                <li>1 User</li>
+                <li>Email Support</li>
+            </ul>
+
+            <button>Choose Plan</button>
+        </div>
+
+
+        <!-- Standard Plan -->
+        <div class="card">
+            <h2>Standard</h2>
+
+            <p class="price">₹499</p>
+
+            <ul>
+                <li>50 GB Storage</li>
+                <li>5 Users</li>
+                <li>Email Support</li>
+            </ul>
+
+            <button>Choose Plan</button>
+        </div>
+
+
+        <!-- Premium Plan -->
+        <div class="card">
+            <h2>Premium</h2>
+
+            <p class="price">₹999</p>
+
+            <ul>
+                <li>100 GB Storage</li>
+                <li>10 Users</li>
+                <li>24/7 Support</li>
+            </ul>
+
+            <button>Choose Plan</button>
+        </div>
+
+    </div>
+
+    <a href="task1.html">Back</a>
+</body>
+
+</html>

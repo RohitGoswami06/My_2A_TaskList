@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shopping Cart</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .products {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .product {
+            background-color: white;
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 0 8px #ccc;
+        }
+
+        .product button {
+            padding: 8px 15px;
+            background-color: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .cart {
+            background-color: white;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 8px #ccc;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+        }
+
+        .quantity button {
+            padding: 5px 10px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .remove {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            cursor: pointer;
+        }
+
+        .total {
+            text-align: right;
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Shopping Cart</h1>
+
+
+    <!-- Products -->
+
+    <div class="products">
+
+        <div class="product">
+            <h3>Product A</h3>
+            <p>₹500</p>
+
+            <button onclick="addToCart(1)">
+                Add to Cart
+            </button>
+        </div>
+
+
+        <div class="product">
+            <h3>Product B</h3>
+            <p>₹800</p>
+
+            <button onclick="addToCart(2)">
+                Add to Cart
+            </button>
+        </div>
+
+
+        <div class="product">
+            <h3>Product C</h3>
+            <p>₹1200</p>
+
+            <button onclick="addToCart(3)">
+                Add to Cart
+            </button>
+        </div>
+
+    </div>
+
+
+    <!-- Cart -->
+
+    <div class="cart">
+
+        <h2>Your Cart</h2>
+
+        <div id="cartItems">
+            <p>Your cart is empty.</p>
+        </div>
+
+        <div class="total">
+            Total: ₹<span id="total">0</span>
+        </div>
+
+        <a href="task1.html">Back</a>
+
+    </div>
+
+
+    <script>
+
+        // Products data
+        var products = [
+            {
+                id: 1,
+                name: "Product A",
+                price: 500
+            },
+            {
+                id: 2,
+                name: "Product B",
+                price: 800
+            },
+            {
+                id: 3,
+                name: "Product C",
+                price: 1200
+            }
+        ];
+
+
+        // Empty cart
+        var cart = [];
+
+
+        // Add product to cart  
+        function addToCart(id) {
+
+            var product = products.find(function(item) {
+                return item.id === id;
+            });
+
+
+            // Check karo product already cart me hai ya nahi
+            var existingProduct = cart.find(function(item) {
+                return item.id === id;
+            });
+
+
+            if (existingProduct) {
+
+                // Quantity increase karo
+                existingProduct.quantity++;
+
+            } else {
+
+                // New product cart me add karo
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    quantity: 1
+                });
+
+            }
+
+
+            displayCart();
+        }
+
+
+        // Display cart
+        function displayCart() {
+
+            var cartItems = document.getElementById("cartItems");
+
+            cartItems.innerHTML = "";
+
+            var total = 0;
+
+
+            if (cart.length === 0) {
+
+                cartItems.innerHTML = "<p>Your cart is empty.</p>";
+
+            }
+
+
+            for (var i = 0; i < cart.length; i++) {
+
+                var item = cart[i];
+
+                var itemTotal = item.price * item.quantity;
+
+                total = total + itemTotal;
+
+
+                var div = document.createElement("div");
+
+                div.className = "cart-item";
+
+
+                div.innerHTML = `
+                    <div>
+                        <strong>${item.name}</strong>
+                        <br>
+                        ₹${item.price}
+                    </div>
+
+                    <div class="quantity">
+
+                        <button onclick="decreaseQuantity(${item.id})">
+                            -
+                        </button>
+
+                        ${item.quantity}
+
+                        <button onclick="increaseQuantity(${item.id})">
+                            +
+                        </button>
+
+                    </div>
+
+                    <button
+                        class="remove"
+                        onclick="removeFromCart(${item.id})">
+                        Remove
+                    </button>
+                `;
+
+
+                cartItems.appendChild(div);
+            }
+
+
+            document.getElementById("total").innerText = total;
+        }
+
+
+        // Increase quantity
+        function increaseQuantity(id) {
+
+            for (var i = 0; i < cart.length; i++) {
+
+                if (cart[i].id === id) {
+
+                    cart[i].quantity++;
+
+                }
+
+            }
+
+            displayCart();
+        }
+
+
+        // Decrease quantity
+        function decreaseQuantity(id) {
+
+            for (var i = 0; i < cart.length; i++) {
+
+                if (cart[i].id === id) {
+
+                    cart[i].quantity--;
+
+                    if (cart[i].quantity <= 0) {
+
+                        cart.splice(i, 1);
+
+                    }
+
+                }
+
+            }
+
+            displayCart();
+        }
+
+
+        // Remove product
+        function removeFromCart(id) {
+
+            for (var i = 0; i < cart.length; i++) {
+
+                if (cart[i].id === id) {
+
+                    cart.splice(i, 1);
+
+                }
+
+            }
+
+            displayCart();
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Number Sorting</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .box {
+            width: 400px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        input {
+            width: 80%;
+            padding: 12px;
+            margin: 15px 0;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+
+        <h2>Number Sorting</h2>
+
+        <p>Enter numbers separated by commas</p>
+
+        <input
+            type="text"
+            id="numbers"
+            placeholder="Example: 5, 2, 9, 1, 7"
+        >
+
+        <br>
+
+        <button onclick="sortAscending()">
+            Ascending
+        </button>
+
+        <button onclick="sortDescending()">
+            Descending
+        </button>
+
+        <p id="result"></p>
+        <a href="task1.html">Back</a>
+
+    </div>
+
+
+    <script>
+
+        function getNumbers() {
+
+            let input = document.getElementById("numbers").value;
+
+            let numbers = input.split(",");
+
+            for (let i = 0; i < numbers.length; i++) {
+                numbers[i] = Number(numbers[i]);
+            }
+
+            return numbers;
+        }
+
+
+        // Small to Big
+        function sortAscending() {
+
+            let numbers = getNumbers();
+
+            numbers.sort(function(a, b) {
+                return a - b;
+            });
+
+            document.getElementById("result").innerText =
+                "Ascending: " + numbers.join(", ");
+        }
+
+
+        // Big to Small
+        function sortDescending() {
+
+            let numbers = getNumbers();
+
+            numbers.sort(function(a, b) {
+                return b - a;
+            });
+
+            document.getElementById("result").innerText =
+                "Descending: " + numbers.join(", ");
+        }
+
+    </script>
+
+</body>
+</html>

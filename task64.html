@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Theme Switcher</title>
+
+    <style>
+
+        /* Light Theme */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            color: black;
+
+            text-align: center;
+            padding: 50px;
+
+            transition: 0.3s;
+        }
+
+        .box {
+            max-width: 500px;
+            margin: auto;
+            padding: 30px;
+
+            background-color: #f2f2f2;
+            border-radius: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 20px;
+
+            border: none;
+            border-radius: 5px;
+
+            background-color: black;
+            color: white;
+
+            cursor: pointer;
+        }
+
+
+        /* Dark Theme */
+
+        body.dark {
+            background-color: #222;
+            color: white;
+        }
+
+        body.dark .box {
+            background-color: #333;
+        }
+
+        body.dark button {
+            background-color: white;
+            color: black;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="box">
+
+        <h1>Theme Switcher</h1>
+
+        <p>
+            Click the button to change the website theme.
+        </p>
+
+        <button onclick="changeTheme()" id="themeButton">
+            Dark Mode
+        </button>
+
+        <a href="task1.html">Back</a>
+
+    </div>
+
+
+    <script>
+
+        function changeTheme() {
+
+            var body = document.body;
+
+            var button = document.getElementById("themeButton");
+
+
+            // Dark class add/remove karo
+            body.classList.toggle("dark");
+
+
+            // Button ka text change karo
+            if (body.classList.contains("dark")) {
+
+                button.innerText = "Light Mode";
+
+            } else {
+
+                button.innerText = "Dark Mode";
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>

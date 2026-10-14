@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Modal</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        /* Popup background */
+        .modal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Login box */
+        .login-box {
+            background: white;
+            padding: 25px;
+            width: 300px;
+            border-radius: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+        .close {
+            float: right;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        a{
+            margin-left: 170px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- <button>Login</button> -->
+
+    <div class="modal">
+
+        <div class="login-box"
+             role="dialog"
+             aria-modal="true"
+             aria-labelledby="login-title">
+
+            <button class="close" aria-label="Close login">&times;</button>
+
+            <h2 id="login-title">Login</h2>
+
+            <form>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email">
+
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password">
+
+                <button type="submit">Login</button>
+                 <a href="task1.html">Back</a>
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

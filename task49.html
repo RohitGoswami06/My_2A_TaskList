@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Palindrome Checker</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        .box {
+            width: 400px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        input {
+            width: 80%;
+            padding: 12px;
+            margin: 15px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+
+        <h2>Palindrome Checker</h2>
+
+        <p>Enter a word:</p>
+
+        <input 
+            type="text"
+            id="text"
+            placeholder="Example: madam"
+        >
+
+        <br>
+
+        <button onclick="checkPalindrome()">
+            Check
+        </button>
+
+        <p id="result"></p>
+        <a href="task1.html">Back</a>
+
+    </div>
+
+
+    <script>
+
+        function checkPalindrome() {
+
+            let text = document.getElementById("text").value;
+
+            // Convert text to lowercase
+            text = text.toLowerCase();
+
+            // Reverse the text
+            let reverseText = text.split("").reverse().join("");
+
+            // Check original and reversed text
+            if (text == reverseText) {
+
+                document.getElementById("result").innerText =
+                    "It is a Palindrome.";
+
+            }
+            else {
+
+                document.getElementById("result").innerText =
+                    "It is Not a Palindrome.";
+
+            }
+        }
+
+    </script>
+
+</body>
+</html>

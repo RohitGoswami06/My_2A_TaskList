@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CRUD API</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+    <div class="container py-5">
+
+        <h1 class="text-center mb-4">
+            CRUD API
+        </h1>
+
+        <a href="task1.html">Back</a>
+
+        <!-- Form -->
+        <div class="card shadow-sm mb-4">
+
+            <div class="card-body">
+
+                <h4 id="formTitle" class="mb-3">
+                    Add Post
+                </h4>
+
+                <input
+                    type="text"
+                    id="title"
+                    class="form-control mb-3"
+                    placeholder="Enter title">
+
+                <textarea
+                    id="body"
+                    class="form-control mb-3"
+                    rows="3"
+                    placeholder="Enter description"></textarea>
+
+                <button
+                    id="saveBtn"
+                    onclick="createPost()"
+                    class="btn btn-primary">
+                    Add Post
+                </button>
+
+                <button
+                    onclick="cancelEdit()"
+                    id="cancelBtn"
+                    class="btn btn-secondary d-none">
+                    Cancel
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- Loading -->
+        <div id="loader" class="text-center d-none">
+            <div class="spinner-border text-primary"></div>
+            <p class="mt-2">Loading...</p>
+        </div>
+
+
+        <!-- Posts -->
+        <div id="posts" class="row g-4"></div>
+
+    </div>
+
+
+    <script>
+
+        var API_URL = "https://jsonplaceholder.typicode.com/posts";
+
+        var editingId = null;
+
+
+        // =========================
+        // READ
+        // =========================
+
+        function getPosts() {
+
+            document.getElementById("loader").classList.remove("d-none");
+
+            fetch(API_URL + "?_limit=6")
+
+                .then(function(response) {
+
+                    return response.json();
+
+                })
+
+                .then(function(data) {
+
+                    document.getElementById("loader")
+                        .classList.add("d-none");
+
+                    displayPosts(data);
+
+                })
+
+                .catch(function(error) {
+
+                    console.log(error);
+
+                    document.getElementById("loader")
+                        .classList.add("d-none");
+
+                });
+        }
+
+
+        // Display Posts
+
+        function displayPosts(data) {
+
+            var posts = document.getElementById("posts");
+
+            posts.innerHTML = "";
+
+
+            for (var i = 0; i < data.length; i++) {
+
+                var post = data[i];
+
+
+                posts.innerHTML += `
+
+                    <div class="col-12 col-md-6 col-lg-4">
+
+                        <div class="card h-100 shadow-sm">
+
+                            <div class="card-body">
+
+                                <h5 class="card-title">
+                                    ${post.title}
+                                </h5>
+
+                                <p class="card-text">
+                                    ${post.body}
+                                </p>
+
+                                <button
+                                    class="btn btn-warning btn-sm"
+                                    onclick="editPost(${post.id})">
+                                    Edit
+                                </button>
+
+                                <button
+                                    class="btn btn-danger btn-sm"
+                                    onclick="deletePost(${post.id})">
+                                    Delete
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                `;
+            }
+        }
+
+
+        // =========================
+        // CREATE
+        // =========================
+
+        function createPost() {
+
+            var title =
+                document.getElementById("title").value;
+
+            var body =
+                document.getElementById("body").value;
+
+
+            if (title === "" || body === "") {
+
+                alert("Please fill all fields.");
+
+                return;
+            }
+
+
+            fetch(API_URL, {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    title: title,
+                    body: body,
+                    userId: 1
+
+                })
+
+            })
+
+            .then(function(response) {
+
+                return response.json();
+
+            })
+
+            .then(function(data) {
+
+                alert("Post created successfully!");
+
+                console.log("Created:", data);
+
+                clearForm();
+
+                getPosts();
+
+            })
+
+            .catch(function(error) {
+
+                console.log(error);
+
+                alert("Create operation failed.");
+
+            });
+        }
+
+
+        // =========================
+        // UPDATE
+        // =========================
+
+        function editPost(id) {
+
+            editingId = id;
+
+
+            fetch(API_URL + "/" + id)
+
+                .then(function(response) {
+
+                    return response.json();
+
+                })
+
+                .then(function(data) {
+
+                    document.getElementById("title").value =
+                        data.title;
+
+                    document.getElementById("body").value =
+                        data.body;
+
+
+                    document.getElementById("formTitle")
+                        .innerText = "Update Post";
+
+
+                    document.getElementById("saveBtn")
+                        .innerText = "Update Post";
+
+
+                    document.getElementById("saveBtn")
+                        .onclick = updatePost;
+
+
+                    document.getElementById("cancelBtn")
+                        .classList.remove("d-none");
+
+                })
+
+                .catch(function(error) {
+
+                    console.log(error);
+
+                });
+        }
+
+
+        function updatePost() {
+
+            var title =
+                document.getElementById("title").value;
+
+            var body =
+                document.getElementById("body").value;
+
+
+            fetch(API_URL + "/" + editingId, {
+
+                method: "PUT",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    id: editingId,
+                    title: title,
+                    body: body,
+                    userId: 1
+
+                })
+
+            })
+
+            .then(function(response) {
+
+                return response.json();
+
+            })
+
+            .then(function(data) {
+
+                alert("Post updated successfully!");
+
+                console.log("Updated:", data);
+
+                cancelEdit();
+
+                getPosts();
+
+            })
+
+            .catch(function(error) {
+
+                console.log(error);
+
+                alert("Update operation failed.");
+
+            });
+        }
+
+
+        // =========================
+        // DELETE
+        // =========================
+
+        function deletePost(id) {
+
+            var confirmDelete =
+                confirm("Are you sure you want to delete this post?");
+
+
+            if (!confirmDelete) {
+
+                return;
+            }
+
+
+            fetch(API_URL + "/" + id, {
+
+                method: "DELETE"
+
+            })
+
+            .then(function(response) {
+
+                return response.json();
+
+            })
+
+            .then(function(data) {
+
+                alert("Post deleted successfully!");
+
+                console.log("Deleted:", data);
+
+                getPosts();
+
+            })
+
+            .catch(function(error) {
+
+                console.log(error);
+
+                alert("Delete operation failed.");
+
+            });
+        }
+
+
+        // =========================
+        // FORM RESET
+        // =========================
+
+        function clearForm() {
+
+            document.getElementById("title").value = "";
+
+            document.getElementById("body").value = "";
+        }
+
+
+        function cancelEdit() {
+
+            editingId = null;
+
+            clearForm();
+
+
+            document.getElementById("formTitle")
+                .innerText = "Add Post";
+
+
+            document.getElementById("saveBtn")
+                .innerText = "Add Post";
+
+
+            document.getElementById("saveBtn")
+                .onclick = createPost;
+
+
+            document.getElementById("cancelBtn")
+                .classList.add("d-none");
+        }
+
+
+        // Page load
+        getPosts();
+
+    </script>
+
+</body>
+
+</html>

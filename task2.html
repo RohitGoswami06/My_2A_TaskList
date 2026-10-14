@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Website</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: rgb(247, 249, 252);
+            color: black;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+
+        }
+
+        header {
+
+            height: 70px;
+            background-color: white;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .navbar {
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 26px;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        nav a:hover,
+        nav .active {
+            color: blue;
+        }
+
+        /* ------------welcome-------------------- */
+
+        .welcome {
+            height: 345px;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.15),
+                    rgba(255, 255, 255, 0.15)),
+                url("https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1600&q=80");
+            background-size: cover;
+            background-position: center;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .welcome_content h2 {
+            font-size: 43px;
+            margin-bottom: 18px;
+            color: rgb(19, 19, 19);
+        }
+
+        .welcome_content p {
+            font-size: 20px;
+            padding-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .btn {
+            background-color: rgb(23, 107, 252);
+            color: white;
+            /* height: 50px;
+            width: 150px; */
+            font-weight: bold;
+            font-size: 15px;
+            border-radius: 6%;
+
+            padding: 12px 22px;
+            display: inline-block;
+
+
+
+        }
+
+        .btn:hover {
+            background-color: #0052c7;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 32px;
+            padding-top: 40px;
+            padding-bottom: 50px;
+        }
+
+        .hading {
+            margin-bottom: 30px;
+            font-size: 26px;
+        }
+
+        .post {
+
+            background-color: white;
+
+            display: flex;
+
+            gap: 20px;
+
+            padding: 16px;
+
+            margin-bottom: 15px;
+
+            border-radius: 7px;
+
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+        }
+
+        .post img {
+            border-radius: 5px;
+        }
+
+        img {
+            width: 234px;
+            height: 200px;
+        }
+
+        .category {
+            color: blue;
+            font-weight: bold;
+
+        }
+
+        .hading2 {
+            margin-bottom: 15px;
+            margin-top: 10px;
+        }
+
+        .detail {
+            color: rgb(81, 79, 79);
+            font-weight: 1px;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 60px;
+
+        }
+
+        .bottom-content {
+            margin-top: auto;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            font-size: 13px;
+
+            color: #4b5563;
+
+        }
+
+        .More {
+            color: #3888f8;
+            font-weight: bold;
+        }
+
+        .More:hover {
+            text-decoration: underline;
+        }
+
+        .view-posts {
+            text-align: center;
+
+            margin-top: 20px;
+        }
+
+        /* -------------- right side--------------- */
+
+        .post-detail {
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(3, 3, 3, 0.06);
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .post-detail h2 {
+            font-size: 20px;
+        }
+
+        .profile {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .post-detail p {
+            font-size: 15px;
+            color: rgb(61, 60, 60);
+            text-align: center;
+            line-height: 1.7;
+        }
+
+        .category-heading {
+            margin-bottom: 20px;
+        }
+
+        .categories {
+
+            list-style: none;
+            font-size: 14px;
+        }
+
+        .categories li {
+            margin-bottom: 20px;
+        }
+
+        .popular-posts {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .popular-posts img {
+            height: 55px;
+            width: 55px;
+            border-radius: 5px;
+
+
+        }
+
+        .posts-content h3 {
+            margin-top: 7px;
+            font-size: 15px;
+        }
+
+        .posts-content p {
+            font-size: 12px;
+            text-align: left;
+            margin-top: 4px;
+        }
+
+        footer {
+            background-color: #121c2c;
+            color: white;
+        }
+
+        .footer-class {
+
+            width: 90%;
+            display: flex;
+           justify-content: space-around;
+        }
+
+        .footer-column {
+            padding-left: 80px;
+            padding-top: 30px;
+            padding-bottom: 40px;
+
+        }
+
+        .footer-column h2 {
+            margin-bottom: 14px;
+        }
+
+        .footer-column p {
+
+            margin-top: 15px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .social {
+            font-size: 20px;
+            font-weight: bold;
+            display: flex;
+            gap: 20px;
+
+        }
+
+        .direction {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 14px;
+        }
+        
+        .subscribe{
+            height: 40px;
+            width: 260px;
+            background-color: white;
+            border-radius: 6px;
+        }
+
+        .subscribe input{
+            margin-left: 10px;
+            height: 40px;
+            border: none;
+            outline: none;
+
+        }
+
+        .subscribe button{
+            color: white;
+            font-weight: bold;
+            background-color: #3888f8;
+            height: 40px;
+            width: 83px;
+            border: none;
+            border-top-right-radius: 6px;
+            border-bottom-right-radius: 6px;
+            cursor: pointer;
+        }
+        .subscribe button:hover{
+           background-color: #0052c7;
+        }
+
+        .footer-end{
+            height: 50px;
+           background-color: #121c2c;
+           border-top: 1px solid  #39414d;
+           font-size: 14px;
+           
+           display: flex;
+           justify-content: center;
+           align-items: center;
+
+        }
+
+         .back a{
+            color: white;
+            height: 15px;
+            width: 20px;
+            background-color: black;
+            padding: 3px;
+            border-radius: 3px;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container navbar">
+
+            <h1 class="logo">My Blog</h1>
+
+            <nav>
+
+                <a class="a" href="#">Home</a>
+                <a class="a" href="#">About</a>
+                <a class="a" href="#">Categories</a>
+                <a class="a" href="#">Contact</a>
+               <buttonv class="back">
+                <a href="task1.html">Back</a>
+               </button>
+
+            </nav>
+
+
+        </div>
+    </header>
+
+    <!-- -----------------Main------------------------- -->
+
+    <secton class="welcome">
+
+        <div class="welcome_content">
+
+            <h2> Welcome to My Blog</h2>
+
+            <p>I share my though on web development, coding,<br>
+                and technology</p>
+
+            <a href="#" class="btn">
+                Explore Posts
+            </a>
+
+        </div>
+
+    </secton>
+
+    <main class="container main-content">
+
+        <!-- -------------------left side-------------- -->
+
+        <section>
+
+            <h2 class="hading"> Latest Blog Posts</h2>
+
+            <!-- -------post1------------- -->
+
+            <article class="post">
+
+                <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=600&q=80"
+                    alt="HTML Code">
+
+                <div class="post-content">
+
+                    <span class="category">Web Development</span> <br>
+
+                    <h2 class="hading2">Getting Started with HTML</h2>
+
+                    <P class="detail">HTML is the standard markup language for creating web pages. It <br>
+                        provides the structure of a webpage.</P>
+
+                    <div class="bottom-content">
+
+
+                        <span>May 20, 2026 • 5 min read </span>
+                        <a href="#" class="More">Read More --></a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+            <!-- -----------post2----------- -->
+
+            <article class="post">
+
+                <img src="https://images.unsplash.com/photo-1523437113738-bbd3cc89fb19?auto=format&fit=crop&w=600&q=80"
+                    alt="CSS">
+
+                <div class="post-content">
+
+                    <span class="category">Web Design</span> <br>
+
+                    <h2 class="hading2">Why CSS is Important</h2>
+
+                    <P class="detail">CSS helps us style and design beautiful websites. It controls layout,<br>
+                        colors, fonts, and responsiveness</P>
+
+                    <div class="bottom-content">
+
+
+                        <span>May 18, 2026 • 4 min read </span>
+                        <a href="#" class="More">Read More --></a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+            <!-- -------------post 3------------ -->
+
+            <article class="post">
+
+                <img src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?auto=format&fit=crop&w=600&q=80"
+                    alt="JavaScript">
+                <div class="post-content">
+
+                    <span class="category">JavaScript</span> <br>
+
+                    <h2 class="hading2">Introduction to JavaScript</h2>
+
+                    <P class="detail">JavaScript makes our websites interactive and dynamic. It is an essential <br>
+                        part of front-end development.</P>
+
+                    <div class="bottom-content">
+
+
+                        <span>May 15, 2026 • 6 min read </span>
+                        <a href="#" class="More">Read More --></a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <div class="view-posts">
+
+                <a href="#" class="btn">
+                    View All Posts
+                </a>
+
+            </div>
+        </section>
+
+        <!-- ------------rightside---------- -->
+
+        <article class="article">
+
+
+
+            <section>
+
+                <div class="post-detail">
+
+                    <h2> About Me</h2>
+
+                    <img class="profile" src="https://i.pravatar.cc/300?img=12" alt="Profile">
+
+                    <p>Hi, I'm a passionate web developer who loves to
+                        build websites and share knowledge about web development.</p>
+
+                </div>
+
+                <div class="post-detail">
+
+                    <h2 class="category-heading"> Categories</h2>
+
+                    <ul class="categories">
+
+                        <li>📁 Web Development</li>
+
+                        <li>📁 Web Design</li>
+
+                        <li>📁 JavaScript</li>
+
+                        <li>📁 HTML</li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="post-detail">
+
+                    <h2>Popular Posts</h2>
+
+                    <div class="popular-posts">
+
+                        <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=600&q=80"
+                            alt="HTML Code">
+
+                        <div class="posts-content">
+
+                            <h3>Getting Started with HTML</h3>
+                            <p>May 20, 2026</p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="popular-posts">
+
+                        <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=600&q=80"
+                            alt="HTML Code">
+
+                        <div class="posts-content">
+
+                            <h3>Why CSS is Important</h3>
+                            <p>May 18, 2026</p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="popular-posts">
+
+                        <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=600&q=80"
+                            alt="HTML Code">
+
+                        <div class="posts-content">
+
+                            <h3>Introduction to JavaScript</h3>
+                            <p>May 15, 2026</p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+        </article>
+
+    </main>
+
+
+    <footer>
+
+        <div class="footer-class">
+
+            <div class="footer-column">
+
+                <h2>My Blog</h2>
+
+                <p>Sharing my journey, thoughts and knowledge <br>
+                    about coding and web development. </p>
+
+                <div class="social">
+
+                    <a href="#">f</a>
+                    <a href="#">𝕏</a>
+                    <a href="#">◎</a>
+                    <a href="#">◉</a>
+
+                </div>
+            </div>
+
+            <div class="footer-column">
+
+                <h3>Quick Links</h3>
+
+                <div class="direction">
+
+                    <a href="#">Home</a>
+                    <a href="#">About</a>
+                    <a href="#">Categories</a>
+                    <a href="#">Contact</a>
+
+                </div>
+            </div>
+            
+            <div class="footer-column">
+
+                <h3>Subscribe</h3>
+
+                <p>Get the latest posts delivered straight to your <br>
+                     inbox. </p>
+
+              <div class="subscribe">
+
+                <input type="email" placeholder="Your email">
+
+                <button>
+                    Subscribe
+                </button>
+
+              </div>
+            </div>
+
+        </div>
+
+        <div class="footer-end">
+            <p>© 2026 My Blog. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

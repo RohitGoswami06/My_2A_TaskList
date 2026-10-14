@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+
+    <h2>Promise API Practice</h2>
+    <button id="btn">Get Data</button>
+    <p id="result"></p>
+
+
+    <script>
+
+        let promise1 = Promise.resolve("product is loaded");
+        let promise2 = Promise.resolve("user is loaded");       
+
+        document.getElementById("btn").addEventListener("click", function () {
+
+
+            Promise.all([promise1, promise2])
+                .then(function (results) {
+                    console.log(results);
+                    
+                    document.getElementById("result").innerText = results;
+                }).catch(function (error) {
+                    document.getElementById("result").innerText = error;
+                })
+        });
+
+
+    </script>
+</body>
+
+</html>

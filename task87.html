@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Infinite Scroll</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 30px;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        #posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            font-size: 20px;
+            text-transform: capitalize;
+        }
+
+        .card p {
+            color: #555;
+            line-height: 1.5;
+        }
+
+        #loader {
+            text-align: center;
+            padding: 30px;
+            font-size: 18px;
+        }
+
+        #endMessage {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Infinite Scroll Posts</h1>
+    <a href="task1.html">Back</a>
+
+
+    <!-- Posts -->
+    <div id="posts"></div>
+
+
+    <!-- Loader -->
+    <div id="loader">
+        Loading...
+    </div>
+
+
+    <!-- End Message -->
+    <div id="endMessage">
+        No more posts available.
+    </div>
+
+
+    <script>
+
+        // Current page
+        var currentPage = 1;
+
+
+        // Ek page par kitne posts
+        var postsPerPage = 6;
+
+
+        // API call already chal rahi hai ya nahi
+        var loading = false;
+
+
+        // Kya saare posts load ho chuke hain?
+        var allLoaded = false;
+
+
+        // Posts load karne ka function
+        function loadPosts() {
+
+            // Agar already loading hai
+            // ya saara data load ho chuka hai
+            if (loading || allLoaded) {
+                return;
+            }
+
+
+            loading = true;
+
+
+            document.getElementById("loader").style.display = "block";
+
+
+            fetch(
+                "https://jsonplaceholder.typicode.com/posts"
+                + "?_page=" + currentPage
+                + "&_limit=" + postsPerPage
+            )
+
+
+            .then(function(response) {
+
+                return response.json();
+
+            })
+
+
+            .then(function(data) {
+
+                var posts =
+                    document.getElementById("posts");
+
+
+                // API data ko cards me display karo
+                for (var i = 0; i < data.length; i++) {
+
+                    var card =
+                        document.createElement("div");
+
+                    card.className = "card";
+
+
+                    card.innerHTML = `
+                        <h2>${data[i].title}</h2>
+                        <p>${data[i].body}</p>
+                    `;
+
+
+                    posts.appendChild(card);
+                }
+
+
+                // Agar 6 se kam posts aaye
+                // to samjho data khatam ho gaya
+                if (data.length < postsPerPage) {
+
+                    allLoaded = true;
+
+                    document.getElementById("loader").style.display =
+                        "none";
+
+                    document.getElementById("endMessage").style.display =
+                        "block";
+
+                } else {
+
+                    // Next page ke liye
+                    currentPage++;
+
+                }
+
+
+                loading = false;
+
+            })
+
+
+            .catch(function(error) {
+
+                console.log(error);
+
+                document.getElementById("loader").innerText =
+                    "Data load nahi ho saka.";
+
+                loading = false;
+
+            });
+
+        }
+
+
+        // Scroll event
+        window.addEventListener("scroll", function() {
+
+            /*
+                window.innerHeight
+                = browser ki visible height
+
+                window.scrollY
+                = user ne kitna scroll kiya
+
+                document.documentElement.scrollHeight
+                = page ki total height
+            */
+
+
+            if (
+                window.innerHeight + window.scrollY
+                >= document.documentElement.scrollHeight - 200
+            ) {
+
+                loadPosts();
+
+            }
+
+        });
+
+
+        // First page load
+        loadPosts();
+
+    </script>
+
+</body>
+</html>
